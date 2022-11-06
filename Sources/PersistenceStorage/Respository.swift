@@ -9,9 +9,9 @@ import Foundation
 
 public protocol Repository {
     associatedtype T
-    func create(employee: T)
+    func create(record: T)
     func getAll() -> [T]?
     func get(byIdentifier id: UUID) -> T?
-    func update(employee: T) -> Bool
+    func update(record: T) -> Bool
     func delete(id: UUID) -> Bool
 }

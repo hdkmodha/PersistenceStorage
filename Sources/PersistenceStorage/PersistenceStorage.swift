@@ -12,7 +12,9 @@ public class PersistenceStorage {
     
     public var dbname: String = String()
     
-    public init() {}
+    public init(name: String) {
+        self.dbname = name
+    }
     
     
     public var dabasePath: String {

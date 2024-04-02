@@ -8,24 +8,25 @@
 import Foundation
 import CoreData
 
-public class PersistenceStorage {
+public final class PersistenceStorage: NSObject {
     
-    public var dbname: String = String()
+    private var dbname: String = String()
     
-    public init(name: String) {
-        self.dbname = name
+    public static let shared: PersistenceStorage = PersistenceStorage()
+    
+    override private init() {
+        
     }
     
     
     public var dabasePath: String {
         guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return "" }
         return path.absoluteString
-        
     }
     
     // MARK: - Core Data stack
 
-    public lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: dbname)
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -68,5 +69,8 @@ public class PersistenceStorage {
         return nil
     }
     
+    public func setupDataBase(withName name: String) {
+        self.dbname = name
+    }
     
 }
